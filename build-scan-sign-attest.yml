@@ -1,0 +1,17 @@
+name: Build, Scan, Sign, Attest
+on:
+  push:
+    branches: [ main ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build Docker image
+        run: echo 'docker build placeholder'
+      - name: Generate SBOM
+        run: echo 'syft sbom placeholder'
+      - name: Trivy Scan
+        run: echo 'trivy scan placeholder'
+      - name: Cosign Sign
+        run: echo 'cosign sign placeholder'
