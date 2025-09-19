@@ -1,0 +1,6 @@
+# Ansible
+
+- Playbooks for VM/node configuration.
+- Roles for common services.
+- Inventory defines hosts in lab.
+- Run with `ansible-playbook`.
