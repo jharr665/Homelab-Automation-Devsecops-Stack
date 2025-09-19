@@ -25,20 +25,39 @@ This repo defines the **automation and DevSecOps layer** of the homelab. It ensu
 
 ```mermaid
 flowchart LR
-  Dev[Developer Commit] --> GH[GitHub Repo]
-  GH -->|Build| CI[GitHub Actions CI/CD]
-  CI --> Img[Harbor Registry]
-  Img --> Argo[ArgoCD]
-  Argo --> K8s[Kubernetes Cluster]
+  %% Nodes
+  Dev["Developer Commit"];
+  GH["GitHub Repo"];
+  CI["GitHub Actions CI/CD"];
+  Img["Harbor Registry"];
+  Argo["ArgoCD"];
+  K8s["Kubernetes Cluster"];
+  SBOM["SBOM + Trivy Scan"];
+  Sign["Cosign Sign & Attest"];
+  Verify["Policy Check (Kyverno / Cosign)"];
+  TF["Terraform"];
+  Infra["Proxmox / Cloud Infra"];
+  Ansible["Ansible"];
+  Nodes["Nodes"];
+  MCP["MCP Server"];
+  Policy["Automation Policies"];
 
-  CI --> SBOM[SBOM + Trivy Scan]
-  CI --> Sign[Cosign Sign & Attest]
-  Sign --> Img
-  Img --> Verify[Policy Check (Kyverno/Cosign)]
+  %% Edges
+  Dev --> GH;
+  GH -->|Build| CI;
+  CI --> Img;
+  Img --> Argo;
+  Argo --> K8s;
 
-  TF[Terraform] --> Infra[Proxmox/Cloud Infra]
-  Ansible --> Nodes
-  MCP[MCP Server] --> Policy[Automation Policies]
+  CI --> SBOM;
+  CI --> Sign;
+  Sign --> Img;
+  Img --> Verify;
+
+  TF --> Infra;
+  Ansible --> Nodes;
+  MCP --> Policy;
+
 ```
 
 ---
